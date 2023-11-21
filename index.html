@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link rel="stylesheet" href="./assets/fonts/stylesheet.css" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
+    <link rel="stylesheet" href="./assets/styles/style.css" />
+    <title>
+      Frontend Mentor | Newsletter sign-up form with success message
+    </title>
+  </head>
+  <body>
+    <!-- Sign-up form start -->
+    <div class="signup-form">
+      <div class="sign-container-left">
+        <div>
+          <h1>Stay updated!</h1>
+          <p>
+            Join 60,000+ product managers receiving monthly <br />updates on:
+          </p>
+          <ul>
+            <li>
+              <img src="./assets/images/icon-list.svg" alt="list-icon" />
+              Product discovery and building what matters
+            </li>
+            <li>
+              <img src="./assets/images/icon-list.svg" alt="list-icon" />
+
+              Measuring to ensure updates are a success
+            </li>
+            <li>
+              <img src="./assets/images/icon-list.svg" alt="list-icon" />
+              And much more!
+            </li>
+          </ul>
+        </div>
+
+        <div class="form-control">
+          <div class="label-container">
+            <label for=""> Email address </label>
+            <small class="emailError hide">
+              <span>Valid email required</span>
+            </small>
+          </div>
+          <input
+            type="email"
+            placeholder="email@company.com"
+            onchange="handleInputChange()"
+            id="emailInput"
+            name="email"
+          />
+
+          <button onclick="handleSign();">
+            Subscribe to monthly newsletter
+          </button>
+        </div>
+      </div>
+      <img src="./assets/images/illustration-sign-up-desktop.svg" alt="image" />
+    </div>
+
+    <!-- Sign-up form end -->
+
+    <!-- Success message start -->
+    <div class="success-container hide">
+      <img src="./assets/images/icon-list.svg" alt="icon list" />
+      <h1>Thanks for subscribing!</h1>
+      <p>
+        A confirmation email has been sent to
+        <span id="emailContainer"> ash@loremcompany.com </span>
+        . Please open it and click the button inside to confirm your
+        subscription.
+      </p>
+      <button onclick="dismissClick()">Dismiss message</button>
+    </div>
+
+    <!-- Success message end -->
+
+    <div class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+        >Frontend Mentor</a
+      >. Coded by <a href="#">Thino Rakotomalala</a>.
+    </div>
+    <script type="text/javascript">
+      let isSigned = false;
+      const signUpForm = document.querySelector(".signup-form");
+      const input = document.querySelector("#emailInput");
+      const successContainer = document.querySelector(".success-container");
+      function handleSign(e) {
+        if (
+          input.value.search(/^[a-zA-Z0-9]+@[a-zA-Z]{3,10}.[a-zA-Z]{3}$/) == -1
+        ) {
+          console.log("false");
+          document.querySelector(".emailError").classList.add("show");
+          input.classList.add("error");
+        } else {
+          document.querySelector(".emailError").classList.remove("show");
+          signUpForm.classList.add("hide");
+          successContainer.classList.remove("hide");
+          input.classList.remove("error");
+        }
+      }
+
+      function dismissClick() {
+        signUpForm.classList.remove("hide");
+        successContainer.classList.add("hide");
+      }
+
+      function handleInputChange(e) {
+        const value = input.value;
+        console.log("input change", value);
+
+        document.querySelector("#emailContainer").innerHTML = value;
+        if (
+          input.value.search(/^[a-zA-Z0-9]+@[a-zA-Z]{3,10}.[a-zA-Z]{3}$/) == -1
+        ) {
+          document.querySelector(".emailError").classList.add("show");
+          input.classList.add("error");
+        } else {
+          document.querySelector(".emailError").classList.remove("show");
+
+          input.classList.remove("error");
+        }
+      }
+    </script>
+  </body>
+</html>
